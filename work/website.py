@@ -40,8 +40,8 @@ def get_user_database_connection():
      #   raise
 
 
-def execute_query(query, params=(), database='users_data'):
-    if database == 'users_data':
+def execute_query(query, params=(), database='users'):
+    if database == 'users':
         connection = get_user_database_connection()
     elif database == 'movies':
         connection = get_database_connection()
