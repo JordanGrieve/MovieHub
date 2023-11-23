@@ -4,6 +4,7 @@ import secrets
 import os
 import urllib.parse 
 from urllib.parse import unquote
+import atexit
 
 # Setting a key for the users
 secret_key = secrets.token_hex(32)
@@ -14,6 +15,10 @@ port = int(os.environ.get("PORT", 8080))
 
 app.secret_key = secret_key
 
+@atexit.register
+def goodbye():
+    print("Dynos are going to sleep or restarting...")
+   
 # Connecting to the movies database
 def get_database_connection():
    # return sqlite3.connect('databases/movies.db')
