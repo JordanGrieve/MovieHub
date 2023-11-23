@@ -444,7 +444,10 @@ def account():
 
 # Create a User
 def create_user(username, password):
-    connection = sqlite3.connect('databases/users_data.db')
+   #connection = sqlite3.connect('databases/users_data.db')
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    db_users_path = os.path.join(base_dir, 'databases', 'users.db')
+    connection = sqlite3.connect(db_users_path)
     cursor = connection.cursor()
     cursor.execute('INSERT INTO Users (username, password) VALUES (?, ?)', (username, password))
     connection.commit()
@@ -471,7 +474,9 @@ def signup():
 
 
 def user_exists(username):
-    connection = sqlite3.connect('databases/users_data.db')
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    db_users_path = os.path.join(base_dir, 'databases', 'users.db')
+    connection = sqlite3.connect(db_users_path)
     cursor = connection.cursor()
     cursor.execute('SELECT username FROM Users WHERE username = ?', (username,))
     result = cursor.fetchall()
