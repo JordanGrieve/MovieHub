@@ -18,17 +18,20 @@ app.secret_key = secret_key
 def get_database_connection():
     return sqlite3.connect('databases/movies.db')
 
-def get_user_database_connection():
-    try:
-        connection = sqlite3.connect('databases/users_data.db')
-        print("Connection:", connection)
-        return connection
-    except sqlite3.Error as e:
-        print(f"SQLite error while connecting to user database: {e}")
-        raise 
-    except Exception as e:
-        print(f"Error connecting to user database: {e}")
-        raise
+def get_user_database_connection(): 
+    return sqlite3.connect('databases/users_data.db')
+
+#def get_user_database_connection():
+   # try:
+   #     connection = sqlite3.connect('databases/users_data.db')
+   #     print("Connection:", connection)
+   #     return connection
+   # except sqlite3.Error as e:
+    #    print(f"SQLite error while connecting to user database: {e}")
+   #     raise 
+   # except Exception as e:
+    #    print(f"Error connecting to user database: {e}")
+     #   raise
 
 
 def execute_query(query, params=(), database='users_data'):
