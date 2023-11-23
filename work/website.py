@@ -344,7 +344,9 @@ def faq():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        connection = sqlite3.connect('databases/users_data.db')
+        base_dir = os.path.abspath(os.path.dirname(__file__))
+        db_users_path = os.path.join(base_dir, 'databases', 'users.db')
+        connection = sqlite3.connect(db_users_path)
         cursor = connection.cursor()
 
         username = request.form['username']
