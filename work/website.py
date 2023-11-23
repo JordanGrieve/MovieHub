@@ -1,6 +1,7 @@
 from flask import Flask, render_template, session, request, redirect, url_for, flash
 import sqlite3
 import secrets
+import os
 import urllib.parse 
 from urllib.parse import unquote
 
@@ -8,6 +9,8 @@ from urllib.parse import unquote
 secret_key = secrets.token_hex(32)
 
 app = Flask(__name__)
+
+port = int(os.environ.get("PORT", 8080))
 
 app.secret_key = secret_key
 
@@ -473,4 +476,4 @@ def add_review(user_id, movie_id, rating, ReviewText):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=port)
