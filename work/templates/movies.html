@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieHub - Movies</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/stylesheet.css') }}" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container" style="margin-bottom: -20px;">
+        <!-- NavBar -->
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li class="active"><a href="#">Movies</a></li>
+                        <li><a href="about">About</a></li>
+                        <li><a href="faq">FAQ</a></li>
+                    </ul>
+                    <!-- Float to the right -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--checking if the user is logged in-->
+                        {% if 'user' in session %}
+                        <li><a href="account">{{ session['user'] }}</a></li>
+                        {% else %}
+                        <li><a href="signup">Sign Up</a></li>
+                        <li><a href="login">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container custom-border">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>Pick a Genre</h2>
+                <div class="breaker"></div>
+                <!--Movie Filter-->
+                <ul class="nav nav-pills">
+                    <li class="active"><a data-toggle="pill" href="#allMovies">All</a></li>
+                    <li><a data-toggle="pill" href="#crime">Crime</a></li>
+                    <li><a data-toggle="pill" href="#drama">Drama</a></li>
+                    <li><a data-toggle="pill" href="#Sci-Fi">Sci-Fi</a></li>
+                    <li><a data-toggle="pill" href="#fantasy">Fantasy</a></li>
+                </ul>
+
+                <!--Movie Content-->
+                            
+                <div class="tab-content">
+                  <div id="allMovies" class="tab-pane fade in active">
+                      <div class="container">
+                          <div class="row">
+                              <div class="col-sm-8" style="margin-left: -10px;">
+                                  <h2>All Movies</h2>
+                                  <div class="breaker"></div>
+                                  <div class="movie-card">
+                                      {% for movie in every_movies %}
+                                      <div class="movie-card col-sm-3">
+                                          <a href="/movie_detail/{{ movie[0] }}/{{ movie[1] }}">
+                                              <img src="{{ movie[2] }}" alt="{{ movie[1] }}">
+                                          </a>
+                                      </div>
+                                      {% endfor %}
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div id="crime" class="tab-pane fade">
+                    <div class="container">
+                      <div class="row">
+                          <div class="col-sm-8" style="margin-left: -10px;">
+                              <h2>Crime Movies</h2>
+                              <div class="breaker"></div>
+                              <div class="movie-card">
+                                  {% for movie in crime_movies %}
+                                  <div class="movie-card col-sm-3">
+                                      <a href="/movie_detail/{{ movie[0] }}/{{ movie[1] }}">
+                                          <img src="{{ movie[2] }}" alt="{{ movie[1] }}">
+                                      </a>
+                                  </div>
+                                  {% endfor %}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  </div>
+
+
+
+                  <div id="drama" class="tab-pane fade">
+                    <div class="container">
+                      <div class="row">
+                          <div class="col-sm-8" style="margin-left: -10px;">
+                              <h2>Drama Movies</h2>
+                              <div class="breaker"></div>
+                              <div class="movie-card">
+                                  {% for movie in drama_movies %}
+                                  <div class="movie-card col-sm-3">
+                                      <a href="/movie_detail/{{ movie[0] }}/{{ movie[1] }}">
+                                          <img src="{{ movie[2] }}" alt="{{ movie[1] }}">
+                                      </a>
+                                  </div>
+                                  {% endfor %}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  </div>
+
+
+                  <div id="Sci-Fi" class="tab-pane fade">
+                      <div class="container">
+                      <div class="row">
+                          <div class="col-sm-8" style="margin-left: -10px;">
+                              <h2>Sci-Fi Movies</h2>
+                              <div class="breaker"></div>
+                              <div class="movie-card">
+                                  {% for movie in SciFi_movies %}
+                                  <div class="movie-card col-sm-3">
+                                      <a href="/movie_detail/{{ movie[0] }}/{{ movie[1] }}">
+                                          <img src="{{ movie[2] }}" alt="{{ movie[1] }}">
+                                      </a>
+                                  </div>
+                                  {% endfor %}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  </div>
+
+
+
+
+                  <div id="fantasy" class="tab-pane fade">
+                    <div class="container">
+                      <div class="row">
+                          <div class="col-sm-8" style="margin-left: -10px;">
+                              <h2>Fantasy Movies</h2>
+                              <div class="breaker"></div>
+                              <div class="movie-card">
+                                  {% for movie in fantasy_movies %}
+                                  <div class="movie-card col-sm-3">
+                                      <a href="/movie_detail/{{ movie[0] }}/{{ movie[1] }}">
+                                          <img src="{{ movie[2] }}" alt="{{ movie[1] }}">
+                                      </a>
+                                  </div>
+                                  {% endfor %}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--End of Col-8-->
+            </div>
+
+
+                <div class="col-sm-4 custom-border-left">
+                    <h4>MovieHub’s Top Rated</h4>
+                    {% for movie in topRate_movies %}
+                    <a href="/movie_detail/{{ movie[0] }}/{{ movie[1] }}">
+                        <div class="card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="{{ movie[2] }}" alt="{{ movie[1] }}">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ movie[1] }}</h5>
+                                        <p class="card-text">{{ movie[3][:50]|join('') }}{% if movie[3]|length > 50 %}...{% endif %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+      
+
+    <!--End of Row-->
+  </div>
+
+
+  <!--End of Container-->
+  </div>
+
+    <div class="container footer">
+        <h6>SET09103 2023-4 TR1 001 - Advanced Web Technologies - Jordan Grieve</h6>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

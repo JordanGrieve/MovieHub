@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieHub - About</title>
+    <link href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/stylesheet.css') }}" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container">
+        <!-- NavBar -->
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="movies">Movies</a></li>
+                        <li class="active"><a href="#">About</a></li>
+                        <li><a href="faq">FAQ</a></li>
+                    </ul>
+                    <!-- Float to the right -->
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if 'user' in session %}
+                        <li><a href="account">{{ session['user'] }}</a></li>
+                        {% else %}
+                        <li><a href="signup">Sign Up</a></li>
+                        <li><a href="login">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <!-- Hero Image -->
+        <img src="{{ url_for('static', filename='img/pawpatrol.jpg') }}" alt="PawPatrol" id="hero_image">
+        </div>
+<!-- Body Container -->
+<div class="container custom-border" style="padding-left: 10px; padding-right: 10px;" id="content">
+    <!--Content-->
+    <h2>Welcome to MovieHub - Your Ultimate Movie Destination!</h2>
+    <div class="breaker"></div>
+    <p>
+        At MovieHub, we believe in the magic of cinema and the power it holds to connect people across the globe. We've curated a dynamic online space that serves as your go-to source for all things movies. Whether you're a cinephile, casual viewer, or a film enthusiast, MovieHub is designed to be your personalized cinematic haven.
+        <br><br>
+        <b>What Sets Us Apart:</b>
+        <br><br>
+        Extensive Movie Database: Dive into a vast collection of movies spanning genres, eras, and cultures. Our meticulously curated database ensures that you discover hidden gems, timeless classics, and the latest releases all in one place.
+        <br><br>
+        Personalized Profiles: Your movie journey is unique, and so is your MovieHub profile. Sign in to create a personalized space where you can showcase your favorite movies, share insightful reviews, and connect with fellow movie buffs. It's your digital canvas to express your cinematic taste.
+        <br><br>
+        Favorite-ing Made Easy: Love a movie? Simply click the "Favorite" button to add it to your profile. Build a library of your top picks, creating a visual representation of your cinematic preferences. Your profile becomes a reflection of your movie journey, a virtual scrapbook of your filmic adventures.
+        <br><br>
+        Community Interaction: MovieHub is more than just a database; it's a community of passionate movie lovers. Engage with like-minded individuals, discuss your favorite films, and discover new recommendations. Our platform fosters a sense of belonging, connecting you with people who share your love for the silver screen.
+        <br><br>
+        Review and Be Reviewed: Express your thoughts on the movies you've watched by writing reviews. Share your insights, ratings, and recommendations to help others discover their next favorite film. Embrace the diversity of opinions within our thriving community.
+        <br><br>
+        <b>Your Gateway to Cinematic Exploration:</b>
+        <br><br>
+        MovieHub is not just a website; it's a celebration of cinema. Whether you're seeking nostalgic classics, thrilling blockbusters, or indie gems, MovieHub is your gateway to cinematic exploration. Join us in the pursuit of movie magic and let your film journey unfold on MovieHub!
+        <br><br>
+        Sign up now, customize your profile, and embark on a cinematic adventure like never before. MovieHub - where your love for movies meets the digital realm!<br><br></p>
+
+
+    <!--Body container-->
+    </div>
+    <!--footer-->
+    <div class="container footer">
+        <h6>SET09103 2023-4 TR1 001 - Advanced Web Technologies - Jordan Grieve</h6>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

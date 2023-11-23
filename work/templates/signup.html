@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieHub - Sign Up</title>
+    <link href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/stylesheet.css') }}" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container">
+        <!-- NavBar -->
+        <nav class="navbar navbar-inverse" style="margin-bottom: 0px;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="movies">Movies</a></li>
+                        <li><a href="about">About</a></li>
+                        <li><a href="faq">FAQ</a></li>
+                    </ul>
+                    <!-- Float to the right -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="#">Sign Up</a></li>
+                        <li><a href="login">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <!-- Hero Image -->
+        <img src="{{ url_for('static', filename='img/pawpatrol.jpg') }}" alt="PawPatrol" id="hero_image">
+        </div>
+<!-- Body Container -->
+<div class="container custom-border" id="login_signup">
+    <div class="row">
+        <div class="col-sm-8">
+            <h2>Sign Up</h2>
+            <div class="breaker"></div>
+
+            <!--start of Sign up content-->
+            <p style="padding-bottom: 20px;">Creating an account on MovieHub is easy! Click on the "Sign Up" button, fill in the required information, and you're ready to embark on your cinematic journey. Customize your profile, add your favorite movies, and start engaging with the MovieHub community. </p>
+
+            <!--Sign Up form-->
+                <form method="post" action="{{ url_for('signup') }}">
+                    <div class="form-row">
+                        <div class="input-data">
+                            <input type="text" name="username" required>
+                            <div class="underline"></div>
+                            <label for="username">Username</label>
+                        </div>
+                        <div class="input-data" style="margin-left: 10px;">
+                            <input name="password" type="password" required>
+                            <div class="underline"></div>
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                        <!-- Flash messages section -->
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <div class="flashes">
+                                {% for category, message in messages %}
+                                    <p class="{{ category }}">
+                                        {% if category == 'error' %}
+                                            <span style="color: red;">{{ message }}</span>
+                                        {% elif category == 'success' %}
+                                            <span style="color: green;">{{ message }}</span>
+                                        {% else %}
+                                            {{ message }}
+                                        {% endif %}
+                                    </p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        {% endwith %}
+
+
+                    <div class="form-row submit-btn">
+                        <button class="btn" type="submit">Sign Up</button>
+                    </div>
+                </form>
+
+
+              <div class="row">
+                <div class="col-sm-12" style="margin-left: -10px;">
+                <!--NewsLetter Section-->
+                <h2>NewsLetter</h2>
+                    <div class="breaker"></div>
+
+                    <p>Join the 'Blockbuster' Newsletter! Lights, camera, action! Don't miss out on the latest movie magic and exclusive behind-the-scenes 'reel'velations. Subscribe today and let the film-fueled fun come straight to your inbox</p><br>
+
+                    <p>Stay in the director's chair of your movie journey - Subscribe now and be the first to know what's 'coming soon' to your screen</p>
+
+                    <form action="#">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="input-data">
+                                    <input type="email" required>
+                                    <div class="underline"></div>
+                                    <label for="">Email Address</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3" style="margin-top: -20px;">
+                                <button class="btn" type="submit">Subscribe</button>
+                            </div>
+                        </div> 
+                    </form>
+                </div>
+                </div>
+
+              
+              
+            <!--End of col-sm-8-->
+        </div>
+
+        <!--Start of aside-->
+        
+        <div class="col-sm-4 custom-border-left">
+            <h4>Login</h4>
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <p class="card-text" style="text-align: center; padding-top: 10px; font-size: 15px;">ALready got an account with us? Click below to be taken to our login page where you can login and customize your profile page and favorite movies.</p>
+                                <div class="text-center">
+                                    <a href="{{ url_for('login') }}" class="btn btn-primary">login Here</a>
+                                </div>
+
+
+                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <!--end of row-->
+        </div>
+
+    <!--Body container-->
+    </div>
+    <!--footer-->
+    <div class="container footer">
+        <h6>SET09103 2023-4 TR1 001 - Advanced Web Technologies - Jordan Grieve</h6>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

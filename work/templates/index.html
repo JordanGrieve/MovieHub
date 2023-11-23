@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieHub</title>
+    <link href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/stylesheet.css') }}" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container">
+        <!-- NavBar -->
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="movies">Movies</a></li>
+                        <li><a href="about">About</a></li>
+                        <li><a href="faq">FAQ</a></li>
+                    </ul>
+                    <!-- Float to the right -->
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if 'user' in session %}
+                        <li><a href="account">{{ session['user'] }}</a></li>
+                        {% else %}
+                        <li><a href="signup">Sign Up</a></li>
+                        <li><a href="login">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <!-- Hero Image -->
+        <img src="{{ url_for('static', filename='img/pawpatrol.jpg') }}" alt="PawPatrol" id="hero_image">
+        </div>
+<!-- Body Container -->
+<div class="container custom-border">
+        <!-- Start of content -->
+        <div class="row">
+            <!-- Start of col -->
+            <div class="col-sm-8">
+                <!-- Title -->
+                <h2>Newest Movies</h2>
+                <div class="breaker"></div>
+                <div class="movie-card">
+                    {% for movie in newest_movies %}
+                    <div class="movie-card col-sm-3">
+                        <a href="/movie_detail/{{ movie[0] }}/{{ movie[1] }}">
+                            <img src="{{ movie[2] }}" alt="{{ movie[1] }}">
+                        </a>
+                        
+                    </div>
+                {% endfor %}
+                
+                </div>
+            </div>
+            <!-- End of col -->
+
+            <div class="col-sm-4 custom-border-left">
+                <h4>MovieHub’s Top Rated</h4>
+                <!--test-->
+                {% for movie in topRate_movies %}
+                <a href="/movie_detail/{{ movie[0] }}/{{ movie[1] }}">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="{{ movie[2] }}" alt="{{ movie[1] }}">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ movie[1] }}</h5>
+                                <!-- Limit the description to 25 words -->
+                                <p class="card-text">{{ movie[3][:50]|join('') }}{% if movie[3]|length > 50 %}...{% endif %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+            
+                  
+  
+
+
+
+            </div>
+        </div>
+        <!-- End of row -->
+        <div class="row mb-5">
+            <!-- Start of col -->
+            <div class="col-sm-8">
+                <!-- Title -->
+                <h2>Classic Movies</h2>
+                <div class="breaker"></div>
+                <div class="movie-card">
+                    {% for movie in classic_movies %}
+                        <div class="movie-card col-sm-3">
+                            <a href="/movie_detail/{{ movie[0] }}/{{ movie[1] }}">
+                                <img src="{{ movie[2] }}" alt="{{ movie[1] }}">
+                            </a>
+                    </div>
+                {% endfor %}
+                
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <div class="container footer">
+        <h6>SET09103 2023-4 TR1 001 - Advanced Web Technologies - Jordan Grieve</h6>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

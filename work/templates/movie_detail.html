@@ -1,0 +1,182 @@
+<!-- movie_detail.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie_details['Title'] }} - Movie Details</title>
+    <link href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/stylesheet.css') }}" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container" style="margin-bottom: -20px;">
+        <!-- NavBar -->
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/movies">Movies</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                    </ul>
+                    <!-- Float to the right -->
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if 'user' in session %}
+                        <li><a href="/account">{{ session['user'] }}</a></li>
+                        {% else %}
+                        <li><a href="/signup">Sign Up</a></li>
+                        <li><a href="/login">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+<!-- Body Container -->
+<div class="container custom-border">
+    <!-- Start of content -->
+    <div class="row" id="movie_detail_movie">
+        <!-- Start of col -->
+        <div class="col-sm-8">
+            <!-- Movie Title -->
+            <h2>{{ movie_details['Title'] }}</h2>
+            <div class="breaker"></div>
+            <!--End of col-->
+            <!--Movie Content-->
+            <div class="col-sm-3 custom-border-right">
+                
+                <img src="{{ movie_details['Image'] }}" alt="{{ movie_details['Title'] }}">
+                <div class="status-heading">Edit Status</div>
+                <div class="breaker"></div>
+                <form method="POST" action="{{ url_for('add_to_favorites', movie_id=movie_details['movieID'], movie_title=movie_details['Title']) }}">
+                    <label for="favorite" style="color: #fdfdfd;">Add to Favorites:</label>
+                    <input type="checkbox" id="favorite" name="favorite">
+                    <button type="submit" style="margin-top: 30px;">Add to Favorites</button>
+                </form>
+
+
+                <!--End of Picture-->
+            </div>
+            <div class="col-sm-8" style="margin-left: 10px;width: 73%;" >
+                <h5>Movie Description</h5>
+                <p>{{ movie_details['Description'] }}</p>
+
+                <h5>Actors</h5>
+                <p>{{ movie_details['Actors'] }}</p>
+
+                <h5>Director</h5>
+                <p>{{ movie_details['Director'] }}</p>
+
+                <div class="group-items">
+                    <div class="item">
+                        <h5>Release Year</h5>
+                        <p>{{ movie_details['yearRelease'] }}</p>
+                    </div>
+                    <div class="item" style="padding-left: 100px;">
+                        <h5>Run Time</h5>
+                        <p>{{ movie_details['Duration'] }}</p>
+                    </div>
+                </div>
+
+                <!--review section-->
+                <div class="group-items-2">
+                    <div class="item-2">
+                        <div class="review-heading">Reviews</div>
+                    </div>
+                </div>
+
+                <div class="breaker"></div>
+
+                <!-- form to add reviews if user is logged in-->
+                {% if 'user' in session %}
+                    <form method="post" action="{{ url_for('movie_detail', movie_id=movie_details.movieID, movie_title=movie_details.Title) }}">
+                        <label for="review_text">Write a Review:</label>
+                        <textarea name="review_text" rows="4" cols="50" required></textarea>
+                        <br>
+                        <button type="submit">Submit Review</button>
+                    </form>
+                    {% else %}
+                    {% endif %}
+
+                <!--Users Reviews-->
+                <div class="review-section">
+                    {% if reviews %}
+                    {% for review in reviews %}
+                    <div class="card" style="margin-top: 30px;">
+                        <div class="card-body">
+                        <h5 class="card-title">Profile Username: {{ review[0] }}</h5>
+                        <p class="card-text">Review: {{ review[1] }}</p>
+                        </div>
+                </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="card" style="margin-top: 30px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Profile Username: Your Username will appear here</h5>
+                            <p class="card-text">There are no reviews available for this movie. Write one if you are logged in :D</p>
+                        </div>
+                    </div>
+                {% endif %}          
+                </div>
+
+                    
+                
+            </div>
+
+
+
+        </div>
+        <div class="col-sm-4 custom-border-left">
+            <h4>MovieHub’s Top Rated</h4>
+            <!--test-->
+            {% for movie in topRate_movies %}
+            <a href="/movie_detail/{{ movie[0] }}/{{ movie[1] }}">
+            <div class="card">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{ movie[2] }}" alt="{{ movie[1] }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ movie[1] }}</h5>
+                            <!-- Limit the description to 25 words -->
+                            <p class="card-text">{{ movie[3][:50]|join('') }}{% if movie[3]|length > 50 %}...{% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+        </div>
+
+            
+            </div>
+        </div>
+        <!-- End of col -->
+
+
+    </div>
+    
+
+        </div>
+    </div>
+        <!--footer-->
+        <div class="container footer">
+            <h6>SET09103 2023-4 TR1 001 - Advanced Web Technologies - Jordan Grieve</h6>
+        </div>
+    
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

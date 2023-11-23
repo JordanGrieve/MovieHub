@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieHub - FAQ</title>
+    <link href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/stylesheet.css') }}" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container">
+        <!-- NavBar -->
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="movies">Movies</a></li>
+                        <li><a href="about">About</a></li>
+                        <li class="active"><a href="#">FAQ</a></li>
+                    </ul>
+                    <!-- Float to the right -->
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if 'user' in session %}
+                        <li><a href="account">{{ session['user'] }}</a></li>
+                        {% else %}
+                        <li><a href="signup">Sign Up</a></li>
+                        <li><a href="login">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <!-- Hero Image -->
+        <img src="{{ url_for('static', filename='img/pawpatrol.jpg') }}" alt="PawPatrol" id="hero_image">
+        </div>
+<!-- Body Container -->
+<div class="container custom-border" style="padding-left: 10px; padding-right: 10px;" id="content">
+    <!--Content-->
+    <h2>Frequently Asked Questions (FAQ)</h2>
+    <div class="breaker"></div>
+    <p>
+        <b>1. What is MovieHub?</b>
+        <br> <br>
+        MovieHub is an online platform dedicated to the world of movies. It's your one-stop destination for discovering, exploring, and connecting with a global community of movie enthusiasts. From an extensive movie database to personalized profiles and community interaction, MovieHub offers a unique and tailored cinematic experience.
+        <br> <br>
+
+        <b>2. How do I create an account on MovieHub?</b>
+        <br> <br>
+        Creating an account on MovieHub is easy! Click on the "Sign Up" button, fill in the required information, and you're ready to embark on your cinematic journey. Customize your profile, add your favorite movies, and start engaging with the MovieHub community.
+        <br> <br>
+
+        <b>3. How can I customize my profile on MovieHub?</b>
+        <br> <br>
+        Once you've logged in, navigate to your profile page. Click on the "Edit Profile" option to add a profile picture, bio, and other personal details. To showcase your favorite movies, simply click the "Favorite" button on the movie's page, and it will be added to your profile.
+        <br> <br>
+
+        <b>4. How do I interact with the MovieHub community?</b>
+        <br> <br>
+        Engaging with the MovieHub community is simple. Join discussions in the forums, comment on movie reviews, and connect with other users who share your cinematic interests. The "Community" section is your gateway to interactive and meaningful conversations about movies.
+        <br> <br>
+
+        <b>5. Can I write reviews on MovieHub?</b>
+        <br> <br>
+        Absolutely! We encourage you to share your thoughts and opinions on the movies you've watched. Visit the movie's page, scroll down to the reviews section, and click on "Write a Review." Express yourself, rate the movie, and contribute to the vibrant tapestry of perspectives within the MovieHub community.
+        <br> <br>
+
+        <b>6. How do I find specific movies on MovieHub?</b>
+        <br> <br>
+        Use the search bar at the top of the page to find specific movies. You can also explore curated lists, browse by genre, or check out our recommendations. With a vast movie database, MovieHub makes it easy to discover both well-known titles and hidden cinematic gems.
+        <br> <br>
+
+        <b>7. Is MovieHub free to use?</b>
+        <br> <br>
+        Yes, MovieHub is free to use! You can create an account, customize your profile, explore the movie database, and engage with the community without any subscription fees. We're committed to making the world of movies accessible to everyone.
+        <br> <br>
+
+        <b>8. How can I report issues or suggest improvements?</b>
+        <br> <br>
+        We value your feedback! If you encounter any issues or have suggestions for improvements, please contact our support team via our email @ MovieHub@sales.com. Your input is crucial in helping us enhance the MovieHub experience for all users.
+        <br> <br>
+        Join MovieHub today and elevate your movie-watching experience to new heights! If you have additional questions, feel free to reach out through our support channels. Happy movie exploring!
+        <br><br></p>
+
+
+    <!--Body container-->
+    </div>
+    <!--footer-->
+    <div class="container footer">
+        <h6>SET09103 2023-4 TR1 001 - Advanced Web Technologies - Jordan Grieve</h6>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
