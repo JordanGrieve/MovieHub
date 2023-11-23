@@ -16,10 +16,16 @@ app.secret_key = secret_key
 
 # Connecting to the movies database
 def get_database_connection():
-    return sqlite3.connect('databases/movies.db')
+   # return sqlite3.connect('databases/movies.db')
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    db_movies_path = os.path.join(base_dir, 'databases', 'movies.db')
+    return sqlite3.connect(db_movies_path)
 
 def get_user_database_connection(): 
-    return sqlite3.connect('databases/users_data.db')
+   # return sqlite3.connect('databases/users_data.db')
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    db_users_path = os.path.join(base_dir, 'databases', 'users_data.db')
+    return sqlite3.connect(db_users_path)
 
 #def get_user_database_connection():
    # try:
