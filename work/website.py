@@ -24,7 +24,7 @@ def get_database_connection():
 def get_user_database_connection(): 
    # return sqlite3.connect('databases/users_data.db')
     base_dir = os.path.abspath(os.path.dirname(__file__))
-    db_users_path = os.path.join(base_dir, 'databases', 'users_data.db')
+    db_users_path = os.path.join(base_dir, 'databases', 'users.db')
     return sqlite3.connect(db_users_path)
 
 #def get_user_database_connection():
