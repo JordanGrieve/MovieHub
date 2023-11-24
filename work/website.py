@@ -2,7 +2,6 @@ from flask import Flask, render_template, session, request, redirect, url_for, f
 import sqlite3
 import secrets
 import os
-import urllib.parse 
 from urllib.parse import unquote
 import atexit
 
@@ -13,12 +12,14 @@ app = Flask(__name__)
 
 port = int(os.environ.get("PORT", 8080))
 
+app.permanent_session_lifetime = 86400  # 24 hours in seconds
+
 app.secret_key = secret_key
 
 @atexit.register
 def goodbye():
     print("Dynos are going to sleep or restarting...")
-   
+
 # Connecting to the movies database
 def get_database_connection():
    # return sqlite3.connect('databases/movies.db')
@@ -26,7 +27,7 @@ def get_database_connection():
     db_movies_path = os.path.join(base_dir, 'databases', 'movies.db')
     return sqlite3.connect(db_movies_path)
 
-def get_user_database_connection(): 
+def get_user_database_connection():
    # return sqlite3.connect('databases/users_data.db')
     base_dir = os.path.abspath(os.path.dirname(__file__))
     db_users_path = os.path.join(base_dir, 'databases', 'users.db')
@@ -39,7 +40,7 @@ def get_user_database_connection():
    #     return connection
    # except sqlite3.Error as e:
     #    print(f"SQLite error while connecting to user database: {e}")
-   #     raise 
+   #     raise
    # except Exception as e:
     #    print(f"Error connecting to user database: {e}")
      #   raise
@@ -193,7 +194,7 @@ def get_movie_reviews(movie_id):
     connection.close()
     return movie_reviews
 
-# Setting users favorites - 2 foreign keys 
+# Setting users favorites - 2 foreign keys
 def add_to_favorites_db(user_id, movie_id):
     connection = get_user_database_connection()
     cursor = connection.cursor()
@@ -203,7 +204,7 @@ def add_to_favorites_db(user_id, movie_id):
     connection.commit()
     connection.close()
 
-# Remove users favorites 
+# Remove users favorites
 def remove_from_favorites_db(user_id, movie_id):
     connection = get_user_database_connection()
     cursor = connection.cursor()
@@ -255,7 +256,7 @@ def is_movie_in_favorites(user_id, movie_id):
 @app.route('/movie_detail/<int:movie_id>/<path:movie_title>', methods=['GET', 'POST'])
 def movie_detail(movie_id, movie_title):
     decoded_title = unquote(movie_title)
-    
+
     if request.method == 'POST':
         review_text = request.form.get('review_text')
         user_id = session.get('user')
@@ -371,6 +372,7 @@ def login():
             # Set the user_id and username in the session upon successful login
             session['user_id'] = user_id
             session['user'] = username
+            session.permanent = True  # This makes the session cookie permanent
             return redirect(url_for('root'))
 
     return render_template('login.html')
@@ -443,7 +445,7 @@ def account():
         favorite_movies_count = len(favorite_movie_ids)
 
         return render_template('account.html', topRate_movies=topRate_movies, favorite_movie_ids=favorite_movie_ids, favorite_movies_count=favorite_movies_count, get_movie_details_by_id=get_movie_details_by_id)
-    
+
     return render_template('account.html', topRate_movies=topRate_movies, get_movie_details_by_id=get_movie_details_by_id)
 
 
